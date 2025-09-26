@@ -512,3 +512,23 @@ class ClubManagementSystem:
                 print("Invalid choice!")
         except ValueError:
             print("Please enter a valid number!")
+
+    def register_new_student(self):
+        """Register new student"""
+        print("\n--- Student Registration ---")
+        
+        student_id = input("Enter Student ID: ").strip()
+        
+        # Check if ID already exists
+        for student in self.students:
+            if student.id == student_id:
+                print("Student ID already exists!")
+                return
+        
+        name = input("Enter Name: ").strip()
+        password = input("Enter Password: ").strip()
+        
+        new_student = Student(student_id, name, password)
+        self.students.add_element(new_student)
+        
+        print(f"Student {name} registered successfully!")
