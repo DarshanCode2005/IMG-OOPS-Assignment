@@ -563,3 +563,12 @@ class ClubManagementSystem:
         
         print(f"Total Assignments: {total_assignments}")
         print(f"Total Submissions: {total_submissions}")
+
+def main():
+    """Main function to run the Club Management System"""
+    system = ClubManagementSystem()
+    system.start()
+
+
+if __name__ == "__main__":
+    main()
