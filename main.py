@@ -334,3 +334,16 @@ class ClubManagementSystem:
         else:
             for submission in student.submissions:
                 print(submission.get_details())
+
+    def view_admin_clubs(self):
+        """View clubs managed by admin"""
+        admin = self.current_user
+        print(f"\n--- {admin.name}'s Managed Clubs ---")
+        
+        if admin.managed_clubs.get_size() == 0:
+            print("No clubs managed.")
+        else:
+            for i, club in enumerate(admin.managed_clubs, 1):
+                print(f"{i}. {club}")
+                print(f"   Members: {club.members.get_size()}")
+                print(f"   Assignments: {club.assignments.get_size()}")
