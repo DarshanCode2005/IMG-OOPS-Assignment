@@ -76,7 +76,7 @@ class ClubManagementSystem:
         print(f"Students: {self.students.get_size()}")
         print(f"Clubs: {self.clubs.get_size()}")
         print(f"Admins: {self.admins.get_size()}")
-        
+
     def start(self):
         """Start the club management system"""
         print("\n" + "="*50)
@@ -102,3 +102,44 @@ class ClubManagementSystem:
                 sys.exit(0)
             else:
                 print("Invalid choice! Please try again.")
+    
+        def display_main_menu(self):
+        """Display main menu"""
+        print("\n--- MAIN MENU ---")
+        print("1. Student Login")
+        print("2. Admin Login")
+        print("3. Register New Student")
+        print("4. View All Clubs")
+        print("5. System Statistics")
+        print("6. Exit")
+    
+    def student_login(self):
+        """Handle student login"""
+        print("\n--- Student Login ---")
+        student_id = input("Enter Student ID: ").strip()
+        password = input("Enter Password: ").strip()
+        
+        for student in self.students:
+            if student.login(student_id, password):
+                self.current_user = student
+                print(f"Welcome, {student.name}!")
+                self.student_menu()
+                return
+        
+        print("Invalid credentials! Please try again.")
+    
+    def admin_login(self):
+        """Handle admin login"""
+        print("\n--- Admin Login ---")
+        admin_id = input("Enter Admin ID: ").strip()
+        password = input("Enter Password: ").strip()
+        
+        for admin in self.admins:
+            if admin.login(admin_id, password):
+                self.current_user = admin
+                print(f"Welcome, {admin.name}!")
+                self.admin_menu()
+                return
+        
+        print("Invalid credentials! Please try again.")
+    
