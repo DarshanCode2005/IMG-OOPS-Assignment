@@ -391,3 +391,41 @@ class ClubManagementSystem:
                 print("Invalid club choice!")
         except ValueError:
             print("Please enter a valid number!")
+
+    def remove_student_from_club(self):
+        """Remove student from club"""
+        admin = self.current_user
+        
+        if admin.managed_clubs.get_size() == 0:
+            print("You don't manage any clubs.")
+            return
+        
+        # Select club
+        print("\n--- Your Clubs ---")
+        for i, club in enumerate(admin.managed_clubs, 1):
+            print(f"{i}. {club.name} ({club.members.get_size()} members)")
+        
+        try:
+            club_choice = int(input("Select club: ")) - 1
+            if 0 <= club_choice < admin.managed_clubs.get_size():
+                club = admin.managed_clubs.get(club_choice)
+                
+                if club.members.get_size() == 0:
+                    print("No members in this club.")
+                    return
+                
+                # Select member
+                print(f"\n--- Members of {club.name} ---")
+                for i, member in enumerate(club.members, 1):
+                    print(f"{i}. {member}")
+                
+                member_choice = int(input("Select member to remove: ")) - 1
+                if 0 <= member_choice < club.members.get_size():
+                    member = club.members.get(member_choice)
+                    admin.remove_member(club, member)
+                else:
+                    print("Invalid member choice!")
+            else:
+                print("Invalid club choice!")
+        except ValueError:
+            print("Please enter a valid number!")
