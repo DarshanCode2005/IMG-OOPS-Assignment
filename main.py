@@ -429,3 +429,32 @@ class ClubManagementSystem:
                 print("Invalid club choice!")
         except ValueError:
             print("Please enter a valid number!")
+
+    def create_assignment(self):
+        """Create assignment for club"""
+        admin = self.current_user
+        
+        if admin.managed_clubs.get_size() == 0:
+            print("You don't manage any clubs.")
+            return
+        
+        # Select club
+        print("\n--- Your Clubs ---")
+        for i, club in enumerate(admin.managed_clubs, 1):
+            print(f"{i}. {club.name}")
+        
+        try:
+            club_choice = int(input("Select club: ")) - 1
+            if 0 <= club_choice < admin.managed_clubs.get_size():
+                club = admin.managed_clubs.get(club_choice)
+                
+                # Get assignment details
+                title = input("Assignment Title: ").strip()
+                max_score = int(input("Maximum Score: "))
+                deadline = input("Deadline (YYYY-MM-DD): ").strip()
+                
+                admin.create_assignment(club, title, max_score, deadline)
+            else:
+                print("Invalid club choice!")
+        except ValueError:
+            print("Please enter valid values!")
