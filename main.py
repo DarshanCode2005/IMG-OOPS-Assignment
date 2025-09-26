@@ -532,3 +532,34 @@ class ClubManagementSystem:
         self.students.add_element(new_student)
         
         print(f"Student {name} registered successfully!")
+
+    def display_all_clubs(self):
+        """Display all clubs in the system"""
+        print("\n--- All Clubs ---")
+        if self.clubs.get_size() == 0:
+            print("No clubs available.")
+        else:
+            for i, club in enumerate(self.clubs, 1):
+                print(f"{i}. {club}")
+                print(f"   Members: {club.members.get_size()}")
+                print(f"   Assignments: {club.assignments.get_size()}")
+                print()
+
+    def display_system_stats(self):
+        """Display system statistics"""
+        print("\n--- System Statistics ---")
+        print(f"Total Students: {self.students.get_size()}")
+        print(f"Total Clubs: {self.clubs.get_size()}")
+        print(f"Total Admins: {self.admins.get_size()}")
+        
+        # Count total assignments and submissions
+        total_assignments = 0
+        total_submissions = 0
+        
+        for club in self.clubs:
+            total_assignments += club.assignments.get_size()
+            for assignment in club.assignments:
+                total_submissions += assignment.submissions.get_size()
+        
+        print(f"Total Assignments: {total_assignments}")
+        print(f"Total Submissions: {total_submissions}")
