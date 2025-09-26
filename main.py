@@ -261,3 +261,65 @@ class ClubManagementSystem:
         
         if not assignment_found:
             print("No assignments found.")    
+
+    def submit_assignment(self):
+        """Submit an assignment"""
+        student = self.current_user
+        
+        # Collect all assignments from student's clubs
+        all_assignments = Vector()
+        assignment_clubs = Vector()
+        
+        for club in student.clubs:
+            for assignment in club.assignments:
+                all_assignments.add_element(assignment)
+                assignment_clubs.add_element(club)
+        
+        if all_assignments.get_size() == 0:
+            print("No assignments available to submit.")
+            return
+        
+        print("\n--- Available Assignments ---")
+        for i, assignment in enumerate(all_assignments, 1):
+            club = assignment_clubs.get(i-1)
+            print(f"{i}. {assignment} (From: {club.name})")
+        
+        try:
+            choice = int(input("Enter assignment number: ")) - 1
+            if 0 <= choice < all_assignments.get_size():
+                assignment = all_assignments.get(choice)
+                
+                # Check if already submitted
+                already_submitted = False
+                for submission in assignment.submissions:
+                    if submission.student == student:
+                        already_submitted = True
+                        break
+                
+                if already_submitted:
+                    print("You have already submitted this assignment!")
+                    return
+                
+                # Check if late
+                current_date = datetime.now()
+                deadline = datetime.strptime(assignment.deadline, "%Y-%m-%d")
+                is_late = current_date > deadline
+                
+                if is_late:
+                    print("Warning: This submission will be marked as LATE!")
+                    confirm = input("Do you still want to submit? (y/n): ").lower()
+                    if confirm != 'y':
+                        print("Submission cancelled.")
+                        return
+                
+                # Create submission
+                submission = Submission(student, assignment, is_late=is_late)
+                assignment.submissions.add_element(submission)
+                student.submissions.add_element(submission)
+                
+                status = "LATE" if is_late else "ON TIME"
+                print(f"Assignment submitted successfully! Status: {status}")
+            else:
+                print("Invalid choice!")
+        except ValueError:
+            print("Please enter a valid number!")
