@@ -245,4 +245,19 @@ class ClubManagementSystem:
         except ValueError:
             print("Please enter a valid number!")
 
-    
+    def view_assignments(self):
+        """View assignments from student's clubs"""
+        student = self.current_user
+        print("\n--- Your Assignments ---")
+        
+        assignment_found = False
+        for club in student.clubs:
+            if club.assignments.get_size() > 0:
+                print(f"\nFrom {club.name}:")
+                print("-" * 30)
+                for assignment in club.assignments:
+                    print(f"  {assignment}")
+                    assignment_found = True
+        
+        if not assignment_found:
+            print("No assignments found.")    
