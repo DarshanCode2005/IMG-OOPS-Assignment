@@ -490,3 +490,25 @@ class ClubManagementSystem:
                 print("Invalid choice!")
         except ValueError:
             print("Please enter a valid number!")
+
+    def view_club_members(self):
+        """View members of admin's clubs"""
+        admin = self.current_user
+        
+        if admin.managed_clubs.get_size() == 0:
+            print("You don't manage any clubs.")
+            return
+        
+        print("\n--- Your Clubs ---")
+        for i, club in enumerate(admin.managed_clubs, 1):
+            print(f"{i}. {club.name}")
+        
+        try:
+            choice = int(input("Select club to view members: ")) - 1
+            if 0 <= choice < admin.managed_clubs.get_size():
+                club = admin.managed_clubs.get(choice)
+                club.list_members()
+            else:
+                print("Invalid choice!")
+        except ValueError:
+            print("Please enter a valid number!")
