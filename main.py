@@ -76,3 +76,29 @@ class ClubManagementSystem:
         print(f"Students: {self.students.get_size()}")
         print(f"Clubs: {self.clubs.get_size()}")
         print(f"Admins: {self.admins.get_size()}")
+        
+    def start(self):
+        """Start the club management system"""
+        print("\n" + "="*50)
+        print("   CLUB MANAGEMENT SYSTEM - IIT ROORKEE")
+        print("="*50)
+        
+        while True:
+            self.display_main_menu()
+            choice = input("Enter your choice: ").strip()
+            
+            if choice == "1":
+                self.student_login()
+            elif choice == "2":
+                self.admin_login()
+            elif choice == "3":
+                self.register_new_student()
+            elif choice == "4":
+                self.display_all_clubs()
+            elif choice == "5":
+                self.display_system_stats()
+            elif choice == "6":
+                print("Thank you for using Club Management System!")
+                sys.exit(0)
+            else:
+                print("Invalid choice! Please try again.")
