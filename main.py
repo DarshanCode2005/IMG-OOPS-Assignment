@@ -104,14 +104,14 @@ class ClubManagementSystem:
                 print("Invalid choice! Please try again.")
     
         def display_main_menu(self):
-        """Display main menu"""
-        print("\n--- MAIN MENU ---")
-        print("1. Student Login")
-        print("2. Admin Login")
-        print("3. Register New Student")
-        print("4. View All Clubs")
-        print("5. System Statistics")
-        print("6. Exit")
+            """Display main menu"""
+            print("\n--- MAIN MENU ---")
+            print("1. Student Login")
+            print("2. Admin Login")
+            print("3. Register New Student")
+            print("4. View All Clubs")
+            print("5. System Statistics")
+            print("6. Exit")
     
     def student_login(self):
         """Handle student login"""
