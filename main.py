@@ -458,3 +458,35 @@ class ClubManagementSystem:
                 print("Invalid club choice!")
         except ValueError:
             print("Please enter valid values!")
+
+    def view_assignment_submissions(self):
+        """View submissions for assignments"""
+        admin = self.current_user
+        
+        # Collect all assignments from admin's clubs
+        all_assignments = Vector()
+        assignment_clubs = Vector()
+        
+        for club in admin.managed_clubs:
+            for assignment in club.assignments:
+                all_assignments.add_element(assignment)
+                assignment_clubs.add_element(club)
+        
+        if all_assignments.get_size() == 0:
+            print("No assignments found in your clubs.")
+            return
+        
+        print("\n--- Select Assignment ---")
+        for i, assignment in enumerate(all_assignments, 1):
+            club = assignment_clubs.get(i-1)
+            print(f"{i}. {assignment.title} (From: {club.name})")
+        
+        try:
+            choice = int(input("Enter assignment number: ")) - 1
+            if 0 <= choice < all_assignments.get_size():
+                assignment = all_assignments.get(choice)
+                admin.view_submissions(assignment)
+            else:
+                print("Invalid choice!")
+        except ValueError:
+            print("Please enter a valid number!")
