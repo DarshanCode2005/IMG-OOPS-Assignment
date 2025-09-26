@@ -347,3 +347,47 @@ class ClubManagementSystem:
                 print(f"{i}. {club}")
                 print(f"   Members: {club.members.get_size()}")
                 print(f"   Assignments: {club.assignments.get_size()}")
+
+
+    def add_student_to_club(self):
+        """Add student to club"""
+        admin = self.current_user
+        
+        if admin.managed_clubs.get_size() == 0:
+            print("You don't manage any clubs.")
+            return
+        
+        # Select club
+        print("\n--- Your Clubs ---")
+        for i, club in enumerate(admin.managed_clubs, 1):
+            print(f"{i}. {club.name}")
+        
+        try:
+            club_choice = int(input("Select club: ")) - 1
+            if 0 <= club_choice < admin.managed_clubs.get_size():
+                club = admin.managed_clubs.get(club_choice)
+                
+                # Select student
+                print("\n--- Available Students ---")
+                available_students = Vector()
+                for student in self.students:
+                    if club.members.search_element(student) == -1:
+                        available_students.add_element(student)
+                
+                if available_students.get_size() == 0:
+                    print("No students available to add.")
+                    return
+                
+                for i, student in enumerate(available_students, 1):
+                    print(f"{i}. {student}")
+                
+                student_choice = int(input("Select student: ")) - 1
+                if 0 <= student_choice < available_students.get_size():
+                    student = available_students.get(student_choice)
+                    admin.add_member(club, student)
+                else:
+                    print("Invalid student choice!")
+            else:
+                print("Invalid club choice!")
+        except ValueError:
+            print("Please enter a valid number!")
