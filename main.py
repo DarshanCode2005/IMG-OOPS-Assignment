@@ -7,3 +7,72 @@ from assignment import Assignment
 from submission import Submission
 from datetime import datetime, timedelta
 import sys
+
+class ClubManagementSystem:
+    """Main Club Management System"""
+    
+    def __init__(self):
+        self.students = Vector()
+        self.clubs = Vector()
+        self.admins = Vector()
+        self.current_user = None
+        self.initialize_system()
+    
+    def initialize_system(self):
+        """Initialize system with sample data"""
+        print("Initializing Club Management System...")
+        
+        # Create sample students
+        student1 = Student("21114001", "Rahul Sharma", "pass123")
+        student2 = Student("21114002", "Priya Singh", "pass456")
+        student3 = Student("21114003", "Amit Kumar", "pass789")
+        
+        self.students.add_element(student1)
+        self.students.add_element(student2)
+        self.students.add_element(student3)
+        
+        # Create sample admins
+        admin1 = ClubAdmin("admin001", "Dr. Rajesh Verma", "admin123")
+        admin2 = ClubAdmin("admin002", "Prof. Sunita Gupta", "admin456")
+        admin3 = ClubAdmin("admin003", "Dr. Vikram Singh", "admin789")
+        
+        self.admins.add_element(admin1)
+        self.admins.add_element(admin2)
+        self.admins.add_element(admin3)
+        
+        # Create sample clubs
+        img_club = Club("Information Management Group (IMG)", admin1)
+        sds_club = Club("Software Development Section (SDS)", admin2)
+        debsoc_club = Club("Debate Society (DebSoc)", admin3)
+        
+        self.clubs.add_element(img_club)
+        self.clubs.add_element(sds_club)
+        self.clubs.add_element(debsoc_club)
+        
+        # Add some members to clubs
+        img_club.add_member(student1)
+        img_club.add_member(student2)
+        sds_club.add_member(student1)
+        sds_club.add_member(student3)
+        debsoc_club.add_member(student2)
+        
+        # Create sample assignments
+        assignment1 = Assignment("Web Development Project", 100, "2024-12-31")
+        assignment2 = Assignment("Database Design", 80, "2024-11-30")
+        assignment3 = Assignment("Debate Preparation", 50, "2024-10-15")
+        
+        img_club.add_assignment(assignment1)
+        sds_club.add_assignment(assignment2)
+        debsoc_club.add_assignment(assignment3)
+        
+        # Create sample submissions
+        submission1 = Submission(student1, assignment1, "2024-12-25 10:00:00", False, 85)
+        submission2 = Submission(student2, assignment1, "2025-01-02 14:30:00", True, 75)
+        
+        assignment1.submissions.add_element(submission1)
+        assignment1.submissions.add_element(submission2)
+        
+        print("System initialized with sample data!")
+        print(f"Students: {self.students.get_size()}")
+        print(f"Clubs: {self.clubs.get_size()}")
+        print(f"Admins: {self.admins.get_size()}")
