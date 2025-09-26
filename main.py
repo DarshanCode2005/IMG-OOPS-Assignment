@@ -103,15 +103,15 @@ class ClubManagementSystem:
             else:
                 print("Invalid choice! Please try again.")
     
-        def display_main_menu(self):
-            """Display main menu"""
-            print("\n--- MAIN MENU ---")
-            print("1. Student Login")
-            print("2. Admin Login")
-            print("3. Register New Student")
-            print("4. View All Clubs")
-            print("5. System Statistics")
-            print("6. Exit")
+    def display_main_menu(self):
+        """Display main menu"""
+        print("\n--- MAIN MENU ---")
+        print("1. Student Login")
+        print("2. Admin Login")
+        print("3. Register New Student")
+        print("4. View All Clubs")
+        print("5. System Statistics")
+        print("6. Exit")
     
     def student_login(self):
         """Handle student login"""
@@ -167,6 +167,39 @@ class ClubManagementSystem:
             elif choice == "5":
                 self.view_my_submissions()
             elif choice == "6":
+                self.current_user = None
+                print("Logged out successfully!")
+                break
+            else:
+                print("Invalid choice! Please try again.")
+
+    def admin_menu(self):
+        """Admin menu interface"""
+        while True:
+            print(f"\n--- Admin Menu ({self.current_user.name}) ---")
+            print("1. View My Clubs")
+            print("2. Add Student to Club")
+            print("3. Remove Student from Club")
+            print("4. Create Assignment")
+            print("5. View Assignment Submissions")
+            print("6. View Club Members")
+            print("7. Logout")
+            
+            choice = input("Enter your choice: ").strip()
+            
+            if choice == "1":
+                self.view_admin_clubs()
+            elif choice == "2":
+                self.add_student_to_club()
+            elif choice == "3":
+                self.remove_student_from_club()
+            elif choice == "4":
+                self.create_assignment()
+            elif choice == "5":
+                self.view_assignment_submissions()
+            elif choice == "6":
+                self.view_club_members()
+            elif choice == "7":
                 self.current_user = None
                 print("Logged out successfully!")
                 break
