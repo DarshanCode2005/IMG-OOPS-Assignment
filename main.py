@@ -142,4 +142,34 @@ class ClubManagementSystem:
                 return
         
         print("Invalid credentials! Please try again.")
+
+    def student_menu(self):
+        """Student menu interface"""
+        while True:
+            print(f"\n--- Student Menu ({self.current_user.name}) ---")
+            print("1. View My Clubs")
+            print("2. Join Club")
+            print("3. View Assignments")
+            print("4. Submit Assignment")
+            print("5. View My Submissions")
+            print("6. Logout")
+            
+            choice = input("Enter your choice: ").strip()
+            
+            if choice == "1":
+                self.view_student_clubs()
+            elif choice == "2":
+                self.join_club()
+            elif choice == "3":
+                self.view_assignments()
+            elif choice == "4":
+                self.submit_assignment()
+            elif choice == "5":
+                self.view_my_submissions()
+            elif choice == "6":
+                self.current_user = None
+                print("Logged out successfully!")
+                break
+            else:
+                print("Invalid choice! Please try again.")
     
