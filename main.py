@@ -205,4 +205,16 @@ class ClubManagementSystem:
                 break
             else:
                 print("Invalid choice! Please try again.")
+
+    def view_student_clubs(self):
+        """View clubs student is member of"""
+        student = self.current_user
+        print(f"\n--- {student.name}'s Clubs ---")
+        
+        if student.clubs.get_size() == 0:
+            print("You are not a member of any club.")
+        else:
+            for i, club in enumerate(student.clubs, 1):
+                print(f"{i}. {club}")
+
     
