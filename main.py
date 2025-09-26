@@ -323,3 +323,14 @@ class ClubManagementSystem:
                 print("Invalid choice!")
         except ValueError:
             print("Please enter a valid number!")
+
+    def view_my_submissions(self):
+        """View student's submissions"""
+        student = self.current_user
+        print(f"\n--- {student.name}'s Submissions ---")
+        
+        if student.submissions.get_size() == 0:
+            print("No submissions found.")
+        else:
+            for submission in student.submissions:
+                print(submission.get_details())
