@@ -217,4 +217,32 @@ class ClubManagementSystem:
             for i, club in enumerate(student.clubs, 1):
                 print(f"{i}. {club}")
 
+    def join_club(self):
+        """Student joins a club"""
+        student = self.current_user
+        print("\n--- Available Clubs ---")
+        
+        available_clubs = Vector()
+        for club in self.clubs:
+            if club.members.search_element(student) == -1:
+                available_clubs.add_element(club)
+        
+        if available_clubs.get_size() == 0:
+            print("No clubs available to join.")
+            return
+        
+        for i, club in enumerate(available_clubs, 1):
+            print(f"{i}. {club}")
+        
+        try:
+            choice = int(input("Enter club number to join: ")) - 1
+            if 0 <= choice < available_clubs.get_size():
+                club = available_clubs.get(choice)
+                club.add_member(student)
+                print(f"Successfully joined {club.name}!")
+            else:
+                print("Invalid choice!")
+        except ValueError:
+            print("Please enter a valid number!")
+
     
